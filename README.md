@@ -2,7 +2,7 @@
 
 **v0.9.0**
 
-For too long have we had to communicate base-58 or hexadecimal numbers! And the auction-based name systems and first-come-first-serve name systems are not ideal either. This repo contains a new class of encoding scheme: a _pronounceable_ (more-or-less) encodings.
+For too long have we had to communicate base-58 or hexadecimal numbers! And the auction-based name systems and first-come-first-serve name systems are not ideal either. This repo contains a new class of encoding scheme: _pronounceable_ (more-or-less) encodings.
 
 The basic idea is the inversion of the usual approach to account names: force names upon the users, much like how they have gotten their own names.
 
@@ -14,7 +14,7 @@ The scheme implemented in less than 50 lines of python is a simple special case:
 >>> print nume
 Jàňèdűřů Lãbôťĩqůwąqê Þŏķĩwįbec
 >>> print hex(to_number(nume))
-0x18b676bae1e0d99c03c63114fb116ef9d976c13eL
+0x18b676bae1e0d99c03c63114fb116ef9d976c13e
 ```
 
 ### Possible Use for Accounts:
