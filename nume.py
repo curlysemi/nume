@@ -8,7 +8,7 @@ size = len(vowels)
 
 def is_odd(number): return number % 2 != 0
 
-def next_character(number, use_vowel_set): # returns (character, new_set, rem_val)
+def next_character(number, use_vowel_set):
     val = number % size
     rem_val = (number - val) / size
     if use_vowel_set:
@@ -46,22 +46,3 @@ def to_number(nume):
                 pass
         number = number + (size**i * val)
     return number
-
-"""
-We could make our own alphabet, in a way . . .
-Custom font for now, mapped to an extended unicode . . .
-I think LaTeX allows for adding any accent marker to a character,
-so this wouldn't be too hard to specify formally.
-
-(accents per vowel)    (eth addr size)
-10                  => 29
-15                  => 26
-20                  => 23
-
-Numes could be split up into three (first, middle, last)
-(Middles only displayed if collision between two users and
-un-accented names)
-(Accent marks resolve all collisions, except for crypto collisions!)
-
-göţįlãqãtâņūŷôŷåbėrožüsěĵíłũð
-"""
