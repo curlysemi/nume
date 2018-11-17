@@ -2,6 +2,8 @@
 VOWELS     = [u'A',u'À',u'Á',u'Â',u'Ä',u'Å',u'Ā',u'Ą',u'E',u'È',u'É',u'Ê',u'Ë',u'Ē',u'Ė',u'Ę',u'Ě',u'I',u'Ì',u'Í',u'Î',u'Ï',u'Ī',u'Ǐ',u'Į',u'O',u'Ò',u'Ó',u'Ô',u'Ö',u'Ø',u'Ō',u'Ő',u'U',u'Ù',u'Ú',u'Û',u'Ü',u'Ū',u'Ů',u'Ű']
 CONSONANTS = [u'B',u'C',u'Ĉ',u'D',u'Ď',u'F',u'G',u'Ĝ',u'Ģ',u'H',u'Ĥ',u'Ħ',u'J',u'Ĵ',u'K',u'Ķ',u'L',u'Ļ',u'M',u'N',u'Ņ',u'Ň',u'P',u'Q',u'R',u'Ŗ',u'Ř',u'S',u'Ŝ',u'Ş',u'T',u'Ť',u'Ŧ',u'V',u'W',u'Ŵ',u'X',u'Y',u'Ŷ',u'Z',u'Ž']
 
+F,M,L=8,12,10
+
 CLEAN='clean'
 GRAVE='grave' # `
 ACUTE='acute' # ´
@@ -132,11 +134,14 @@ def to_nume_inner(number):
         nume = nume + c
     return nume
 
-def format_nume(nume):
+def format_nume(nume, divs = None):
     # These values should probably be constants declared at the top,
     # or, better yet, computed from `size` and 160 (number of bits in
     # an Ethereum address).
-    f,m,l=8,12,10
+    if divs is None:
+        f,m,l=F,M,L
+    else:
+        f,m,l=divs
     first, middle, last = nume[0:f].title(), nume[f:(f+m)].title(), nume[f+m:].title()
     return (first + " " + middle + " " + last).strip()
 
@@ -161,18 +166,18 @@ def to_number(nume):
         number = number + (size**i * val)
     return number
 
-def strip_accents(nume):
+def strip_accents(nume, divs = None):
     clean_nume = ''
     for n in nume:
         clean_nume = clean_nume + LOOKUPS[n][0]
-    return format_nume(clean_nume)
+    return format_nume(clean_nume, divs)
 
-def format_segments(segments, will_strip_accents = True):
+def format_segments(segments, will_strip_accents = True, divs = None):
     concatenated_nume = ''.join(segments)
     if will_strip_accents:
-        return strip_accents(concatenated_nume)
+        return strip_accents(concatenated_nume, divs)
     else:
-        return format_nume(concatenated_nume)
+        return format_nume(concatenated_nume, divs)
 
 # Here's a `Nume` class to make consuming the relatively low-level
 # methods defined above a bit easier.
@@ -189,13 +194,19 @@ class Nume:
             # 0 <=> cleaned first-name
             return format_segments(self.full_nume[0:1])
         elif form_index is 1:
+            # 1 <=> cleaned first-name and last-initial
+            return format_segments([self.full_nume[0], self.full_nume[2][0]])
+        elif form_index is 2:
             # 1 <=> cleaned first-name and last-name
             # NOTE: If one is experimenting, there is a bit of a gotcha
             # here with `format_segments(...)`, which adds spaces at
             # certain indices. We avoid strange spaces by using the
             # last-name (which is shorter that the middle-name).
             return format_segments([self.full_nume[0], self.full_nume[2]])
-        elif form_index is 2:
+        elif form_index is 3:
+            # 2 <=> cleaned first-name, middle-name, and last-name
+            return format_segments([self.full_nume[0], self.full_nume[1][0], self.full_nume[2]], will_strip_accents = True, divs=(F,1,L))
+        elif form_index is 4:
             # 2 <=> cleaned first-name, middle-name, and last-name
             return format_segments(self.full_nume)
         else:

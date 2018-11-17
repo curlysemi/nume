@@ -1,6 +1,6 @@
 # nume: number name scheme
 
-**v0.9.3-beta**
+**v0.10.1-beta**
 
 For too long have we had to communicate base-58 or hexadecimal numbers! And the auction-based name systems and first-come-first-serve name systems are not ideal either. This repo contains a new class of encoding scheme: _pronounceable_ (more-or-less) encodings.
 
@@ -18,7 +18,7 @@ The scheme implemented in only a relatively-few lines of python is a simple spec
 ```
 
 ### Possible Use for Accounts:
-Since numes can be split up into three segments  (first, middle, last), an account could be displayed initially with only the first segment without any accent. The third segment (and then the second segment, if necessary) can be displayed as a disambiguator. Finally, all segments could be displayed with complete accents as the ultimate disambiguator.
+Since numes can be split up into three segments  (first, middle, last), an account could be displayed initially with only the first segment without any accent. Depending on the other numbers in the context, more initials/segments could be displayed as needed. Finally, all segments could be displayed with complete accents as the ultimate disambiguator.
 
 #### Forms
 ```python
@@ -26,33 +26,62 @@ Since numes can be split up into three segments  (first, middle, last), an accou
 >>> print nume.get_form(0)
 Civevehi
 >>> print nume.get_form(1)
-Civevehi Lozeyewala
+Civevehi L
 >>> print nume.get_form(2)
-Civevehi Giducoholase Lozeyewala
+Civevehi Lozeyewala
 >>> print nume.get_form(3)
+Civevehi G Lozeyewala
+>>> print nume.get_form(4)
+Civevehi Giducoholase Lozeyewala
+>>> print nume.get_form(5)
 Ĉïvévěħį Ĝíďůĉoĥølâsê Ložèŷèwálá
 ```
 
 #### Minimally unique forms
 Given a set of numes, it is possible to find forms such that every represented nume is unique. These are referred to as 'minimally unique forms,' or 'MUFs.' Refer to the code for a definition of `test(...)` to better understand the following example:
 ```python
->>> mufs = test(2**15) # use 32768 random numbers (generate MUFs for 32K Ethereum addresses)
->>> for muf in mufs[-12:]: # collisions are resolved last, so we can peek at the end of the list
->>>   print muf
-Ijotobom
-Jiharulu
-Pebokese
-Galofoja
-Asatohiz Itonihere
-Asatohiz Ozadalata
-Ewigirih Etoceloda
-Ewigirih Odalafaza
-Lesacate Rumonopog
-Lesacate Jowaziruc
-Edegutel Owodilore
-Edegutel Alaholeta
+>>> mufs = test(2**16) # use 65536 random numbers (generate MUFs for ~65K Ethereum addresses)
+>>> for muf in mufs[-36:]: # collisions are resolved last, so we can peek at the end of the list
+...     print muf
+...
+Gasegaqu
+Yenupaho
+Sebugoto J
+Sebugoto B
+Ijiyowih I
+Ijiyowih A
+Nayuduwo C
+Nayuduwo G
+Ikiyasel O
+Ikiyasel A
+Yerohora P
+Yerohora D
+Nivoraji Q
+Nivoraji X
+Eguzocon I
+Eguzocon E
+Arenelaw A
+Arenelaw U
+Wewasayo L
+Wewasayo Y
+Dulepaki K
+Dulepaki G
+Enaviyit U
+Enaviyit I
+Rosejiwu F
+Rosejiwu S
+Ohebotiz I
+Ohebotiz O
+Retojuso H
+Retojuso S
+Itisesaj U
+Itisesaj O
+Uhafayif Acuwuhuzoq
+Uhafayif Ateviwosag
+Akaguled Izokihokan
+Akaguled Icitizaqaj
 ```
-(A much larger set is required to end up with some MUFs of a higher form.)
+(A much larger set is required to end up with some MUFs of a higher form when using random numbers.)
 
 #### Other uses
 This class of scheme could eventually make accounts more 'searchable.' A system could likely be implemented to result in an experience similar to how, in real life, you can tell someone your account name on a legacy social media platform, they search for it and show you the results,and you can point at the correct one.
@@ -65,7 +94,9 @@ This class of scheme could eventually make accounts more 'searchable.' A system 
 * My earlier attempts at pronounceable encoding schemes envisioned 'asymmetrical' encoding, where the two character sets used were not isomorphic to eachother. While an interesting algorithm/formula for determining the number of elements per 'digit' was discovered, it was not that useful and no efficient conversion algorithm was discovered. Had such an algorithm been discovered, the next progression would have been dynamic character sets that would permit consecutive consonants and vowels if they were part of common sequences (such as 'tr', 'th', and so on). Despair took over and I implemented the special case on my flight back from Prague. — {;
 
 ### Changelog
-* v0.9.3-beta:
+* v0.10.1-beta:
+    * Added two more intermediary forms (initials).
+* v0.10.0-beta:
     * Changed character sets.
     * Corrected some accent descriptions.
 * v0.9.2 (Nov 17, 2018):
