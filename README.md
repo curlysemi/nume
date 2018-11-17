@@ -12,7 +12,7 @@ The scheme implemented in only a relatively-few lines of python is a simple spec
 ```python
 >>> nume = to_nume(0x18b676bae1e0d99c03c63114fb116ef9d976c13e)
 >>> print nume
-Jàňèdűŗů Lãbôťĩqůwąqê Þŏķĩwįbec
+Ĉïvévěħį Ĝíďůĉoĥølâsê Ložèŷèwálá
 >>> print hex(to_number(nume))
 0x18b676bae1e0d99c03c63114fb116ef9d976c13e
 ```
@@ -24,13 +24,13 @@ Since numes can be split up into three segments  (first, middle, last), an accou
 ```python
 >>> nume = Nume(0x18b676bae1e0d99c03c63114fb116ef9d976c13e)
 >>> print nume.get_form(0)
-Janeduru
+Civevehi
 >>> print nume.get_form(1)
-Janeduru Pokiwibec
+Civevehi Lozeyewala
 >>> print nume.get_form(2)
-Janeduru Labotiquwaqe Pokiwibec
+Civevehi Giducoholase Lozeyewala
 >>> print nume.get_form(3)
-Jàňèdűŗů Lãbôťĩqůwąqê Þŏķĩwįbec
+Ĉïvévěħį Ĝíďůĉoĥølâsê Ložèŷèwálá
 ```
 
 #### Minimally unique forms
@@ -65,6 +65,9 @@ This class of scheme could eventually make accounts more 'searchable.' A system 
 * My earlier attempts at pronounceable encoding schemes envisioned 'asymmetrical' encoding, where the two character sets used were not isomorphic to eachother. While an interesting algorithm/formula for determining the number of elements per 'digit' was discovered, it was not that useful and no efficient conversion algorithm was discovered. Had such an algorithm been discovered, the next progression would have been dynamic character sets that would permit consecutive consonants and vowels if they were part of common sequences (such as 'tr', 'th', and so on). Despair took over and I implemented the special case on my flight back from Prague. — {;
 
 ### Changelog
+* v0.9.3-beta:
+    * Changed character sets.
+    * Corrected some accent descriptions.
 * v0.9.2 (Nov 17, 2018):
     * Update README.
     * Add accent descriptions to better support future experiments in improving 'searchability.'

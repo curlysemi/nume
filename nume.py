@@ -1,26 +1,21 @@
 # -*- coding: utf-8 -*-
-VOWELS     = [u'A',u'À',u'Á',u'Â',u'Ã',u'Ä',u'Å',u'Ā',u'Ą',u'E',u'È',u'É',u'Ê',u'Ë',u'Ē',u'Ĕ',u'Ė',u'Ę',u'Ě',u'I',u'Ì',u'Í',u'Î',u'Ï',u'Ĩ',u'Ī',u'Ĭ',u'Į',u'O',u'Ò',u'Ó',u'Ô',u'Õ',u'Ö',u'Ø',u'Ō',u'Ŏ',u'Ő',u'U',u'Ù',u'Ú',u'Û',u'Ü',u'Ũ',u'Ū',u'Ŭ',u'Ů',u'Ű']
-CONSONANTS = [u'B',u'C',u'Ç',u'Ĉ',u'Č',u'D',u'Ď',u'F',u'G',u'Ĝ',u'Ģ',u'H',u'Ĥ',u'Ħ',u'J',u'Ĵ',u'K',u'Ķ',u'L',u'Ĺ',u'Ļ',u'Ł',u'M',u'N',u'Ņ',u'Ň',u'P',u'Þ',u'Q',u'R',u'Ŗ',u'Ř',u'S',u'Ŝ',u'Ş',u'Š',u'T',u'Ţ',u'Ť',u'Ŧ',u'V',u'W',u'Ŵ',u'X',u'Y',u'Ŷ',u'Z',u'Ž']
+VOWELS     = [u'A',u'À',u'Á',u'Â',u'Ä',u'Å',u'Ā',u'Ą',u'E',u'È',u'É',u'Ê',u'Ë',u'Ē',u'Ė',u'Ę',u'Ě',u'I',u'Ì',u'Í',u'Î',u'Ï',u'Ī',u'Ǐ',u'Į',u'O',u'Ò',u'Ó',u'Ô',u'Ö',u'Ø',u'Ō',u'Ő',u'U',u'Ù',u'Ú',u'Û',u'Ü',u'Ū',u'Ů',u'Ű']
+CONSONANTS = [u'B',u'C',u'Ĉ',u'D',u'Ď',u'F',u'G',u'Ĝ',u'Ģ',u'H',u'Ĥ',u'Ħ',u'J',u'Ĵ',u'K',u'Ķ',u'L',u'Ļ',u'M',u'N',u'Ņ',u'Ň',u'P',u'Q',u'R',u'Ŗ',u'Ř',u'S',u'Ŝ',u'Ş',u'T',u'Ť',u'Ŧ',u'V',u'W',u'Ŵ',u'X',u'Y',u'Ŷ',u'Z',u'Ž']
 
-CLEAN=''
+CLEAN='clean'
 GRAVE='grave' # `
 ACUTE='acute' # ´
-CIRCUMFLEX='CIRCUMFLEX' # ^
-TILDE='TILDE' # ~
-DIAERESIS='DIAERESIS' # ¨
-RING='RING' # °
-CEDILLA='CEDILLA' # ¸
-# ETH='ETH'
-STROKE='STROKE'
-THORN='THORN'
-MACRON='MACRON' # ¯
-DOT_ABOVE='DOT ABOVE' 
-# DOT_MIDDLE='DOT MIDDLE' # ·
-BREVE='BREVE' # ̆   <-- Warning, combining
-CARON='CARON'
-# OGONEK='OGONEK'
-# ENG='ENG'
-DOUBLE_ACUTE='DOUBLE_ACUTE'
+CIRCUMFLEX='circumflex' # ^
+DIAERESIS='diaeresis' # ¨
+RING='ring' # °
+CEDILLA='cedilla' # ¸
+OGONEK='ogonek'
+STROKE='stroke'
+THORN='thorn'
+MACRON='macron' # ¯
+DOT='dot' 
+CARON='caron'
+DOUBLE_ACUTE='double_acute'
 
 # The following is essentially a lookup table used to strip the accents
 # from complete numes.
@@ -30,56 +25,47 @@ LOOKUPS = {
     u'À': ['A', GRAVE],
     u'Á': ['A', ACUTE],
     u'Â': ['A', CIRCUMFLEX],
-    u'Ã': ['A', TILDE],
     u'Ä': ['A', DIAERESIS],
     u'Å': ['A', RING],
     u'Ā': ['A', MACRON],
-    u'Ą': ['A', CEDILLA],
+    u'Ą': ['A', OGONEK],
     u'E': ['E', CLEAN],
     u'È': ['E', GRAVE],
     u'É': ['E', ACUTE],
     u'Ê': ['E', CIRCUMFLEX],
     u'Ë': ['E', DIAERESIS],
     u'Ē': ['E', MACRON],
-    u'Ĕ': ['E', BREVE],
-    u'Ė': ['E', DOT_ABOVE],
-    u'Ę': ['E', CEDILLA],
+    u'Ė': ['E', DOT],
+    u'Ę': ['E', OGONEK],
     u'Ě': ['E', CARON],
     u'I': ['I', CLEAN],
     u'Ì': ['I', GRAVE],
     u'Í': ['I', ACUTE],
     u'Î': ['I', CIRCUMFLEX],
+    u'Ǐ': ['I', CARON],
     u'Ï': ['I', DIAERESIS],
-    u'Ĩ': ['I', TILDE],
     u'Ī': ['I', MACRON],
-    u'Ĭ': ['I', BREVE],
-    u'Į': ['I', CEDILLA],
+    u'Į': ['I', OGONEK],
     u'O': ['O', CLEAN],
     u'Ò': ['O', GRAVE],
     u'Ó': ['O', ACUTE],
     u'Ô': ['O', CIRCUMFLEX],
-    u'Õ': ['O', TILDE],
     u'Ö': ['O', DIAERESIS],
     u'Ø': ['O', STROKE],
     u'Ō': ['O', MACRON],
-    u'Ŏ': ['O', BREVE],
     u'Ő': ['O', DOUBLE_ACUTE],
     u'U': ['U', CLEAN],
     u'Ù': ['U', GRAVE],
     u'Ú': ['U', ACUTE],
     u'Û': ['U', CIRCUMFLEX],
     u'Ü': ['U', DIAERESIS],
-    u'Ũ': ['U', TILDE],
     u'Ū': ['U', MACRON],
-    u'Ŭ': ['U', BREVE],
     u'Ů': ['U', RING],
     u'Ű': ['U', DOUBLE_ACUTE],
     # consonants
     u'B': ['B', CLEAN],
     u'C': ['C', CLEAN],
-    u'Ç': ['C', CEDILLA],
     u'Ĉ': ['C', CIRCUMFLEX],
-    u'Č': ['C', CARON],
     u'D': ['D', CLEAN],
     u'Ď': ['D', CARON],
     u'F': ['F', CLEAN],
@@ -94,15 +80,12 @@ LOOKUPS = {
     u'K': ['K', CLEAN],
     u'Ķ': ['K', CEDILLA],
     u'L': ['L', CLEAN],
-    u'Ĺ': ['L', ACUTE],
     u'Ļ': ['L', CEDILLA],
-    u'Ł': ['L', STROKE],
     u'M': ['M', CLEAN],
     u'N': ['N', CLEAN],
     u'Ņ': ['N', CEDILLA],
     u'Ň': ['N', CARON],
     u'P': ['P', CLEAN],
-    u'Þ': ['P', THORN],
     u'Q': ['Q', CLEAN],
     u'R': ['R', CLEAN],
     u'Ŗ': ['R', CEDILLA],
@@ -110,9 +93,7 @@ LOOKUPS = {
     u'S': ['S', CLEAN],
     u'Ŝ': ['S', CIRCUMFLEX],
     u'Ş': ['S', CEDILLA],
-    u'Š': ['S', CARON],
     u'T': ['T', CLEAN],
-    u'Ţ': ['T', CEDILLA],
     u'Ť': ['T', CARON],
     u'Ŧ': ['T', STROKE],
     u'V': ['V', CLEAN],
@@ -155,7 +136,7 @@ def format_nume(nume):
     # These values should probably be constants declared at the top,
     # or, better yet, computed from `size` and 160 (number of bits in
     # an Ethereum address).
-    f,m,l=8,12,9
+    f,m,l=8,12,10
     first, middle, last = nume[0:f].title(), nume[f:(f+m)].title(), nume[f+m:].title()
     return (first + " " + middle + " " + last).strip()
 
