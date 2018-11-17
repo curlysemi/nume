@@ -1,23 +1,117 @@
 # -*- coding: utf-8 -*-
-VOWELS     = [u'A',u'À',u'Á',u'Â',u'Ä',u'Å',u'Ā',u'Ą',u'E',u'È',u'É',u'Ê',u'Ë',u'Ē',u'Ė',u'Ę',u'Ě',u'I',u'Ì',u'Í',u'Î',u'Ï',u'Ī',u'Ǐ',u'Į',u'O',u'Ò',u'Ó',u'Ô',u'Ö',u'Ø',u'Ō',u'Ő',u'U',u'Ù',u'Ú',u'Û',u'Ü',u'Ū',u'Ů',u'Ű']
-CONSONANTS = [u'B',u'C',u'Ĉ',u'D',u'Ď',u'F',u'G',u'Ĝ',u'Ģ',u'H',u'Ĥ',u'Ħ',u'J',u'Ĵ',u'K',u'Ķ',u'L',u'Ļ',u'M',u'N',u'Ņ',u'Ň',u'P',u'Q',u'R',u'Ŗ',u'Ř',u'S',u'Ŝ',u'Ş',u'T',u'Ť',u'Ŧ',u'V',u'W',u'Ŵ',u'X',u'Y',u'Ŷ',u'Z',u'Ž']
+VOWELS     = [u'A',u'À',u'Á',u'Â',u'Ä',u'Å',u'Ā',u'Ą',u'E',u'È',u'É',u'Ê',u'Ë',u'Ē',u'Ė',u'Ę',u'I',u'Ì',u'Í',u'Î',u'Ï',u'Ī',u'Ǐ',u'Į',u'O',u'Ò',u'Ó',u'Ô',u'Ö',u'Ø',u'Ō',u'Ő',u'U',u'Ù',u'Ú',u'Û',u'Ü',u'Ū',u'Ů',u'Ű']
+CONSONANTS = [u'B',u'C',u'Ĉ',u'D',u'Ď',u'F',u'G',u'Ĝ',u'Ģ',u'H',u'Ĥ',u'J',u'Ĵ',u'K',u'Ķ',u'L',u'Ļ',u'M',u'N',u'Ņ',u'Ň',u'P',u'Q',u'R',u'Ŗ',u'Ř',u'S',u'Ŝ',u'Ş',u'T',u'Ť',u'Ŧ',u'V',u'W',u'Ŵ',u'X',u'Y',u'Ŷ',u'Z',u'Ž']
 
 F,M,L=8,12,10
 
-CLEAN='clean'
-GRAVE='grave' # `
-ACUTE='acute' # ´
-CIRCUMFLEX='circumflex' # ^
-DIAERESIS='diaeresis' # ¨
-RING='ring' # °
-CEDILLA='cedilla' # ¸
-OGONEK='ogonek'
-STROKE='stroke'
-THORN='thorn'
-MACRON='macron' # ¯
-DOT='dot' 
-CARON='caron'
-DOUBLE_ACUTE='double_acute'
+CLEAN='clean' # (all)
+GRAVE='grave' # ` AEIOU
+ACUTE='acute' # ´ AEIOU
+CIRCUMFLEX='circumflex' # ^ AEIOUCGHJSWY
+DIAERESIS='diaeresis' # ¨ AEIOU
+RING='ring' # ° AU
+CEDILLA='cedilla' # ¸ GKLNRS
+OGONEK='ogonek' # AEI
+STROKE='stroke' # OT
+MACRON='macron' # ¯ AEIOU
+DOT='dot'  # E
+CARON='caron' # IDNRTZ
+DOUBLE_ACUTE='double_acute' # OU
+
+RESET='reset'
+BLACK='black'
+RED='red'
+GREEN='green'
+YELLOW='yellow'
+BLUE='blue'
+MAGENTA='magenta'
+CYAN='cyan'
+WHITE='white'
+
+def get_color_for_character(c, accent):
+    if accent is CLEAN:
+        return BLACK
+    if c in VOWELS:
+        if accent is GRAVE:
+            return MAGENTA
+        if accent is ACUTE:
+            return CYAN
+        if accent is DIAERESIS:
+            return GREEN
+        if accent is MACRON:
+            return YELLOW
+        if accent is CIRCUMFLEX:
+            return RED
+        if c is 'A':
+            if accent is RING:
+                return BLUE
+            if accent is OGONEK:
+                return WHITE
+        if c is 'E':
+            if accent is OGONEK:
+                return BLUE
+            if accent is DOT:
+                return WHITE
+        if c is 'I':
+            if accent is OGONEK:
+                return BLUE
+            if accent is CARON:
+                return WHITE
+        if c is 'O':
+            if accent is STROKE:
+                return BLUE
+            if accent is DOUBLE_ACUTE:
+                return WHITE
+        if c is 'U':
+            if accent is RING:
+                return BLUE
+            if accent is DOUBLE_ACUTE:
+                return WHITE
+    else: # consonant
+        if accent is CIRCUMFLEX:
+            return RED
+        if accent is CEDILLA:
+            return GREEN
+        if accent is STROKE:
+            return MAGENTA
+        if accent is CARON:
+            return WHITE
+    raise Exception(c + ' ' + accent)
+
+def get_ansi_color(color):
+    from colorama import Fore, Back
+    """
+    Fore: BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE, RESET.
+    Back: BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE, RESET.
+    """
+    if color is RESET:
+        fore=Fore.RESET
+        back=Back.RESET
+    if color is BLACK:
+        fore=Fore.WHITE
+        back=Back.BLACK
+    if color is RED:
+        fore=Fore.WHITE
+        back=Back.RED
+    if color is GREEN:
+        fore=Fore.BLACK
+        back=Back.GREEN
+    if color is YELLOW:
+        fore=Fore.BLACK
+        back=Back.YELLOW
+    if color is BLUE:
+        fore=Fore.WHITE
+        back=Back.BLUE
+    if color is MAGENTA:
+        fore=Fore.WHITE
+        back=Back.MAGENTA
+    if color is CYAN:
+        fore=Fore.WHITE
+        back=Back.CYAN
+    if color is WHITE:
+        fore=Fore.BLACK
+        back=Back.WHITE
+    return fore+back
 
 # The following is essentially a lookup table used to strip the accents
 # from complete numes.
@@ -39,7 +133,6 @@ LOOKUPS = {
     u'Ē': ['E', MACRON],
     u'Ė': ['E', DOT],
     u'Ę': ['E', OGONEK],
-    u'Ě': ['E', CARON],
     u'I': ['I', CLEAN],
     u'Ì': ['I', GRAVE],
     u'Í': ['I', ACUTE],
@@ -76,7 +169,6 @@ LOOKUPS = {
     u'Ģ': ['G', CEDILLA],
     u'H': ['H', CLEAN],
     u'Ĥ': ['H', CIRCUMFLEX],
-    u'Ħ': ['H', STROKE],
     u'J': ['J', CLEAN],
     u'Ĵ': ['J', CIRCUMFLEX],
     u'K': ['K', CLEAN],
@@ -166,18 +258,26 @@ def to_number(nume):
         number = number + (size**i * val)
     return number
 
-def strip_accents(nume, divs = None):
+def strip_accents(nume):
     clean_nume = ''
     for n in nume:
-        clean_nume = clean_nume + LOOKUPS[n][0]
-    return format_nume(clean_nume, divs)
+        if n is ' ':
+            clean_nume = clean_nume + n
+        else:
+            clean_nume = clean_nume + LOOKUPS[n][0]
+    return clean_nume
 
 def format_segments(segments, will_strip_accents = True, divs = None):
     concatenated_nume = ''.join(segments)
     if will_strip_accents:
-        return strip_accents(concatenated_nume, divs)
+        clean_nume = strip_accents(concatenated_nume)
+        return format_nume(clean_nume, divs)
     else:
         return format_nume(concatenated_nume, divs)
+
+def format_char(c, color):
+    ansi_color = get_ansi_color(color)
+    return ansi_color + ' ' + c + ' '
 
 # Here's a `Nume` class to make consuming the relatively low-level
 # methods defined above a bit easier.
@@ -217,6 +317,24 @@ class Nume:
         if form_index is None:
             form_index = self.form_index + 1
         self.form_index = form_index
+
+    def print_color(self):
+        # TODO: May need below for Windows:
+        # from colorama import init
+        raw_nume = to_nume_inner(self.number)
+        nume = ''
+        for i,r in enumerate(raw_nume):
+            char_info = LOOKUPS[r]
+            character = char_info[0]
+            color = get_color_for_character(character, char_info[1])
+            if i is not 0:
+                if i is not F and i is not (F+M):
+                    character = character.lower()
+                else:
+                    nume = nume + format_char(' ', RESET)
+            nume = nume + format_char(character, color)
+        nume = nume + get_ansi_color(RESET)
+        print(nume)
 
 # 'Minimally unique forms' (or 'MUFs') are context-dependent forms for
 # numes. They depend on the other numes in the set, and are the bare
