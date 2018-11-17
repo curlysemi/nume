@@ -6,7 +6,7 @@ For too long have we had to communicate base-58 or hexadecimal numbers! And the 
 
 The basic idea is the inversion of the usual approach to account names: force names upon the users, much like how they have gotten their own names.
 
-The scheme implemented in only a relatively-few lines of python is a simple special case: two character sets of equal order. One set contains vowels and the other set contains consonants. Simply take a character from either set in an alternating fashion. With our character set selections, we have essentially base-48.
+The scheme implemented in only a relatively-few lines of python is a simple special case: two character sets of equal order. One set contains vowels and the other set contains consonants. Simply take a character from either set in an alternating fashion. With our character set selections, we have essentially base-41.
 
 ### Example
 ```python
