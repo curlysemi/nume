@@ -1,6 +1,6 @@
 # nume: number name scheme
 
-**v0.9.2**
+**v0.9.3-beta**
 
 For too long have we had to communicate base-58 or hexadecimal numbers! And the auction-based name systems and first-come-first-serve name systems are not ideal either. This repo contains a new class of encoding scheme: _pronounceable_ (more-or-less) encodings.
 
