@@ -1,12 +1,12 @@
 # nume: number name scheme
 
-**v0.9.0**
+**v0.9.1**
 
 For too long have we had to communicate base-58 or hexadecimal numbers! And the auction-based name systems and first-come-first-serve name systems are not ideal either. This repo contains a new class of encoding scheme: _pronounceable_ (more-or-less) encodings.
 
 The basic idea is the inversion of the usual approach to account names: force names upon the users, much like how they have gotten their own names.
 
-The scheme implemented in less than 50 lines of python is a simple special case: two character sets of equal order. One set contains vowels and the other set contains consonants. Simply take a character from either set in an alternating fashion. With our character set selections, we have essentially base-48.
+The scheme implemented in only a relatively-few lines of python is a simple special case: two character sets of equal order. One set contains vowels and the other set contains consonants. Simply take a character from either set in an alternating fashion. With our character set selections, we have essentially base-48.
 
 ### Example
 ```python
@@ -24,6 +24,7 @@ This scheme could make accounts more 'searchable.' A system could likely be impl
 
 ### TODOs:
 * Python3 support
+* Implement as node module (in a separate repo once finalized)
 
 #### Non-normative notes:
 * My earlier attempts at pronounceable encoding schemes envisioned 'asymmetrical' encoding, where the two character sets used were not isomorphic to eachother. While an interesting algorithm/formula for determining the number of elements per 'digit' was discovered, it was not that useful and no efficient conversion algorithm was discovered. Had such an algorithm been discovered, the next progression would have been dynamic character sets that would permit consecutive consonants and vowels if they were part of common sequences (such as 'tr', 'th', and so on). Despair took over and I implemented the special case on my flight back from Prague. — {;
