@@ -2,7 +2,7 @@
 VOWELS     = [u'A',u'À',u'Á',u'Â',u'Ä',u'Å',u'Ā',u'Ą',u'E',u'È',u'É',u'Ê',u'Ë',u'Ē',u'Ė',u'Ę',u'I',u'Ì',u'Í',u'Î',u'Ï',u'Ī',u'Ǐ',u'Į',u'O',u'Ò',u'Ó',u'Ô',u'Ö',u'Ø',u'Ō',u'Ő',u'U',u'Ù',u'Ú',u'Û',u'Ü',u'Ū',u'Ů',u'Ű']
 CONSONANTS = [u'B',u'C',u'Ĉ',u'D',u'Ď',u'F',u'G',u'Ĝ',u'Ģ',u'H',u'Ĥ',u'J',u'Ĵ',u'K',u'Ķ',u'L',u'Ļ',u'M',u'N',u'Ņ',u'Ň',u'P',u'Q',u'R',u'Ŗ',u'Ř',u'S',u'Ŝ',u'Ş',u'T',u'Ť',u'Ŧ',u'V',u'W',u'Ŵ',u'X',u'Y',u'Ŷ',u'Z',u'Ž']
 
-F,M,L=8,12,10
+F,M,L=8,12,11
 
 CLEAN='clean' # (all)
 GRAVE='grave' # ` AEIOU
@@ -297,17 +297,13 @@ class Nume:
             # 1 <=> cleaned first-name and last-initial
             return format_segments([self.full_nume[0], self.full_nume[2][0]])
         elif form_index is 2:
-            # 1 <=> cleaned first-name and last-name
-            # NOTE: If one is experimenting, there is a bit of a gotcha
-            # here with `format_segments(...)`, which adds spaces at
-            # certain indices. We avoid strange spaces by using the
-            # last-name (which is shorter that the middle-name).
+            # 2 <=> cleaned first-name and last-name
             return format_segments([self.full_nume[0], self.full_nume[2]])
         elif form_index is 3:
-            # 2 <=> cleaned first-name, middle-name, and last-name
+            # 3 <=> cleaned first-name, middle-name, and last-name
             return format_segments([self.full_nume[0], self.full_nume[1][0], self.full_nume[2]], will_strip_accents = True, divs=(F,1,L))
         elif form_index is 4:
-            # 2 <=> cleaned first-name, middle-name, and last-name
+            # 4 <=> cleaned first-name, middle-name, and last-name
             return format_segments(self.full_nume)
         else:
             # * <=> accented first-name, middle-name, and last-name
